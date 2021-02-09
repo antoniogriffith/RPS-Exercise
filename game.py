@@ -2,6 +2,9 @@
 #OPIM 243 taught by Michael Rossetti
 #File Name: game.py
 
+#imports
+import random
+
 #TEST print ("Rock", "Paper", "Scissors", "Shoot!")
 
 #----------------------------------------------------------
@@ -30,6 +33,7 @@ while (startCommand != "yes" and startCommand != "y" and startCommand != "sure" 
 
 #Reevaluating Proper Selection     
 if (startCommand == "no" or startCommand == "n" or startCommand == "nope" or startCommand == "quit" or startCommand == "exit"):
+    print("Come back when you are ready! Goodbye...\n\n")
     exit() 
 else:
     print("\nGreat! Let's do it!\n")
@@ -39,15 +43,45 @@ else:
 user_selection = input("\nPlease make a selection: Rock, Paper, or Scissors?\n")
 user_selection = user_selection.upper()
 
-#Input Confirmation
-stuffInString2 = "You've selected {}.".format(user_selection)
-print(stuffInString2)
-
 
 #-----------------------------------------------------------
 #VALIDATING DATA ENTRY
 # This section ensures that the user input is, in fact, rock, paper, scissors, or some variation thereof (i.e. 'r' or 's')
 
+options = ["ROCK", "R", "PAPER", "P", "SCISSORS", "S"]
 
+#Offering Five Attempts for A Correct Entry
+count = 1
+while (user_selection not in options):
+    
+    if (count == 5):
+        print("You have exceeded the maximum number of attempts. Try again later! Goodbye...\n")
+        exit()
+    
+    user_selection = input("\nError: Invalid Entry! Please check your spelling. Enter 'rock', 'paper, or 'scissors':\n")
+    user_selection = user_selection.upper()
+    count += 1
 
+#Converting Abbreviations to a Uniform Mode
+if (user_selection == "R"):
+    user_selection = "ROCK"
+elif (user_selection == "P"):
+    user_selection = "PAPER"
+elif (user_selection == "S"):
+    user_selection = "SCISSORS"
+
+#Input Confirmation
+stuffInString2 = "You've selected {}.".format(user_selection)
+print(stuffInString2)
+    
+#--------------------------------------------------------------------
+#SIMULATING COMPUTER SELECTION
+# This section will you the random module to simulate a random selection by the CPU
+
+cpuOptions = ["ROCK", "PAPER", "SCISSORS"]
+
+#Random Selection from the Above List
+cpuSelection = random.choice(cpuOptions)
+
+print ("\n\n", cpuSelection)
 
