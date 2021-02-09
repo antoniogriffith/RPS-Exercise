@@ -25,11 +25,22 @@ print(stuffInString1)
 #Requiring start command as extra layer against unwanted execution
 startCommand = input("Are you ready to play?\n")
 startCommand = startCommand.lower()
+count = 1
 
+#Offering Five Attempts to Confirm Readiness
 while (startCommand != "yes" and startCommand != "y" and startCommand != "sure" and startCommand != "let's do it" and startCommand != "no" and startCommand != "n" and startCommand != "nope"
-        and startCommand != "exit" and startCommand != "quit" ):
-            startCommand = input("\nError: Invalid Entry! Are you ready to start? Please enter 'yes' or 'no':\n")
-            startCommand = startCommand.lower()
+and startCommand != "exit" and startCommand != "quit" ):
+    
+    if (count == 5):
+        print("You have exceeded the maximum number of attempts. Try again later! Goodbye...\n")
+        exit()
+    
+    startCommand = input("\nError: Invalid Entry! Are you ready to start? Please enter 'yes' or 'no':\n")
+    startCommand = startCommand.lower()
+
+    count += 1
+
+
 
 #Reevaluating Proper Selection     
 if (startCommand == "no" or startCommand == "n" or startCommand == "nope" or startCommand == "quit" or startCommand == "exit"):
@@ -71,7 +82,7 @@ elif (user_selection == "S"):
     user_selection = "SCISSORS"
 
 #Input Confirmation
-stuffInString2 = "You've selected {}.".format(user_selection)
+stuffInString2 = "You've selected {}!".format(user_selection)
 print(stuffInString2)
     
 #--------------------------------------------------------------------
@@ -83,5 +94,40 @@ cpuOptions = ["ROCK", "PAPER", "SCISSORS"]
 #Random Selection from the Above List
 cpuSelection = random.choice(cpuOptions)
 
-print ("\n\n", cpuSelection)
+#Print CPU Selection
+stuffInString3 = "I have chosen {}!\n".format(cpuSelection)
+print(stuffInString3)
+print("-------------------------------------------------------")
+
+#-----------------------------------------------------------------------
+#DETERMINING THE WINNER
+# This section will use an if statement to decide who wins concordant with the rules of the game.
+# i.e. Rock beats Scissors, Scissors beat Paper, Paper beats Rock
+
+if (user_selection == cpuSelection):
+    print("\nIt's a tie! Please play again!\n")
+    exit()
+elif(user_selection == "PAPER"):
+    if (cpuSelection == "ROCK"):
+        print("\nCongratulations! You won! Please play again soon...\n")
+        exit()
+    elif (cpuSelection == "SCISSORS"):
+        print ("\nOh no! You lost! Please play again soon...\n")
+        exit()
+elif (user_selection == "ROCK"):
+    if (cpuSelection == "PAPER"):
+        print ("\nOh no! You lost! Please play again soon...\n")
+        exit()
+    elif (cpuSelection == "SCISSORS"):
+        print("\nCongratulations! You won! Please play again soon...\n")
+        exit()
+elif(user_selection == "SCISSORS"):
+    if (cpuSelection == "PAPER"):
+        print("\nCongratulations! You won! Please play again soon...\n")
+        exit()
+    elif(cpuSelection == "ROCK"):
+        print ("\nOh no! You lost! Please play again soon...\n")
+        exit()
+
+
 
